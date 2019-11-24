@@ -67,11 +67,11 @@ exports.update = (req, res) => {
     }
 
     if (files.photo) {
-      //   if (files.photo.size > 10000000) {
-      //     return res.status(400).json({
-      //       error: 'Photo should be less than 1mb',
-      //     });
-      //   }
+      if (files.photo.size > 1000000) {
+        return res.status(400).json({
+          error: 'Photo should be less than 1mb',
+        });
+      }
       user.photo.data = fs.readFileSync(files.photo.path);
       user.photo.contentType = files.photo.type;
     }
